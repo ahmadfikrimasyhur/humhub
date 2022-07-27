@@ -1,8 +1,9 @@
 <?php
 
 return [
+    'Load more' => 'Buka lagi',
     'An unexpected error occurred while loading the result.' => '',
-    'Load more' => '',
+    'No results found.' => '',
     'No users found for the given query.' => '',
     'Please enter at least {n} character' => '',
     'Select user...' => '',

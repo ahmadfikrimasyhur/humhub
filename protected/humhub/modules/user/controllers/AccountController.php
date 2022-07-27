@@ -10,18 +10,20 @@ namespace humhub\modules\user\controllers;
 
 use humhub\compat\HForm;
 use humhub\modules\content\widgets\ContainerTagPicker;
+use humhub\modules\space\helpers\MembershipHelper;
+use humhub\modules\user\authclient\BaseFormAuth;
 use humhub\modules\user\authclient\interfaces\PrimaryClient;
+use humhub\modules\user\components\BaseAccountController;
 use humhub\modules\user\helpers\AuthHelper;
 use humhub\modules\user\models\forms\AccountChangeEmail;
 use humhub\modules\user\models\forms\AccountChangeUsername;
+use humhub\modules\user\models\forms\AccountDelete;
+use humhub\modules\user\models\Profile;
+use humhub\modules\user\models\User;
+use humhub\modules\user\widgets\ProfileSettingsAutocomplete;
+use humhub\modules\user\widgets\ProfileSettingsPicker;
 use Yii;
 use yii\web\HttpException;
-use humhub\modules\user\components\BaseAccountController;
-use humhub\modules\user\models\User;
-use humhub\modules\user\authclient\BaseFormAuth;
-use humhub\modules\space\helpers\MembershipHelper;
-use humhub\modules\user\models\forms\AccountDelete;
-use humhub\modules\space\models\Membership;
 
 /**
  * AccountController provides all standard actions for the current logged in
@@ -32,6 +34,11 @@ use humhub\modules\space\models\Membership;
  */
 class AccountController extends BaseAccountController
 {
+
+    /**
+     * @inheritdoc
+     */
+    protected $doNotInterceptActionIds = ['delete'];
 
     /**
      * @inheritdoc
@@ -123,6 +130,7 @@ class AccountController extends BaseAccountController
         $model->tags = $user->getTags();
         $model->show_introduction_tour = Yii::$app->getModule('tour')->settings->contentContainer($user)->get("hideTourPanel");
         $model->visibility = $user->visibility;
+        $model->blockedUsers = $user->getBlockedUserGuids();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             Yii::$app->getModule('tour')->settings->contentContainer($user)->set('hideTourPanel', $model->show_introduction_tour);
@@ -132,6 +140,9 @@ class AccountController extends BaseAccountController
             $user->tagsField = $model->tags;
             $user->time_zone = $model->timeZone;
             $user->visibility = $model->visibility;
+            if (Yii::$app->getModule('user')->allowBlockUsers()) {
+                $user->blockedUsersField = $model->blockedUsers;
+            }
             $user->save();
 
             $this->view->saved();
@@ -240,10 +251,15 @@ class AccountController extends BaseAccountController
      */
     public function actionEditModules()
     {
-        $user = Yii::$app->user->getIdentity();
-        $availableModules = $user->getAvailableModules();
+        $this->subLayout = '@humhub/modules/user/views/account/_userModulesLayout';
 
-        return $this->render('editModules', ['user' => $user, 'availableModules' => $availableModules]);
+        /* @var User $user */
+        $user = Yii::$app->user->getIdentity();
+
+        return $this->render('editModules', [
+            'user' => $user,
+            'modules' => $user->moduleManager->getAvailable(),
+        ]);
     }
 
     /**
@@ -259,9 +275,7 @@ class AccountController extends BaseAccountController
         $user = Yii::$app->user->getIdentity();
         $moduleId = Yii::$app->request->get('moduleId');
 
-        if (!$user->isModuleEnabled($moduleId)) {
-            $user->enableModule($moduleId);
-        }
+        $user->moduleManager->enable($moduleId);
 
         if (!Yii::$app->request->isAjax) {
             return $this->redirect(['/user/account/edit-modules']);
@@ -283,9 +297,7 @@ class AccountController extends BaseAccountController
         $user = Yii::$app->user->getIdentity();
         $moduleId = Yii::$app->request->get('moduleId');
 
-        if ($user->isModuleEnabled($moduleId) && $user->canDisableModule($moduleId)) {
-            $user->disableModule($moduleId);
-        }
+        $user->moduleManager->disable($moduleId);
 
         if (!Yii::$app->request->isAjax) {
             return $this->redirect(['/user/account/edit-modules']);

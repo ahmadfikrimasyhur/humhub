@@ -363,13 +363,15 @@ abstract class BasePicker extends JsInputWidget
         return $itemClass::find()->where([$this->itemKey => $selection])->all();
     }
 
-    /*
+    /**
      * @inheritdoc
      */
     protected function getAttributes()
     {
         return [
             'multiple' => 'multiple',
+            'data-multiple' => 'true',
+            'data-tags' => 'true',
             'size' => '1',
             'class' => 'form-control',
             'style' => 'width:100%',

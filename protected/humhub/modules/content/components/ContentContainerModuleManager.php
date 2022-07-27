@@ -32,6 +32,11 @@ class ContentContainerModuleManager extends \yii\base\Component
     private $_available;
 
     /**
+     * @var array the cached states per module
+     */
+    private $_states;
+
+    /**
      * Disables a module for the content container
      *
      * @param string $id the module id
@@ -156,7 +161,7 @@ class ContentContainerModuleManager extends \yii\base\Component
         $this->_available = [];
 
         foreach (Yii::$app->moduleManager->getModules() as $id => $module) {
-            if ($module instanceof ContentContainerModule && Yii::$app->hasModule($module->id) &&
+            if ($module instanceof ContentContainerModule && $module->isActivated &&
                 $module->hasContentContainerType($this->contentContainer->className())) {
                 $this->_available[$module->id] = $module;
             }
@@ -195,6 +200,7 @@ class ContentContainerModuleManager extends \yii\base\Component
     public function flushCache()
     {
         $this->_available = null;
+        $this->_states = null;
     }
 
     /**
@@ -205,21 +211,25 @@ class ContentContainerModuleManager extends \yii\base\Component
      */
     protected function getStates()
     {
-        $states = [];
+        if (isset($this->_states)) {
+            return $this->_states;
+        }
+
+        $this->_states = [];
 
         // Get states for this contentcontainer from database
         foreach (ContentContainerModuleState::findAll(['contentcontainer_id' => $this->contentContainer->contentcontainer_id]) as $module) {
-            $states[$module->module_id] = $module->module_state;
+            $this->_states[$module->module_id] = $module->module_state;
         }
 
         // Get default states, when no state is stored
         foreach ($this->getAvailable() as $module) {
-            if (!isset($states[$module->id])) {
-                $states[$module->id] = self::getDefaultState($this->contentContainer->className(), $module->id);
+            if (!isset($this->_states[$module->id])) {
+                $this->_states[$module->id] = self::getDefaultState(get_class($this->contentContainer), $module->id);
             }
         }
 
-        return $states;
+        return $this->_states;
     }
 
     /**

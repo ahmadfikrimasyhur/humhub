@@ -21,12 +21,18 @@ return array (
   'All open registration invitations were successfully deleted.' => 'ลบคำเชิญการลงทะเบียนที่เปิดอยู่ทั้งหมดเรียบร้อยแล้ว',
   'All the personal data of this user will be irrevocably deleted.' => 'ข้อมูลส่วนบุคคลทั้งหมดของผู้ใช้รายนี้จะถูกลบโดยไม่สามารถเพิกถอนได้',
   'Allow' => 'อนุญาต',
+  'Allow users to block each other' => '',
   'Allow users to set individual permissions for their own profile?' => 'อนุญาตให้ผู้ใช้ตั้งค่าการอนุญาตส่วนบุคคลสำหรับโปรไฟล์ของตนเองหรือไม่',
   'Allow visitors limited access to content without an account (Adds visibility: "Guest")' => 'อนุญาตให้ผู้เยี่ยมชมจำกัดการเข้าถึงเนื้อหาโดยไม่ต้องมีบัญชี (เพิ่มการมองเห็น: "แขก")',
   'Applied to new or existing users without any other group membership.' => 'นำไปใช้กับผู้ใช้ใหม่หรือที่มีอยู่โดยไม่ต้องเป็นสมาชิกกลุ่มอื่น',
+  'Apply' => '',
+  'Approve' => 'อนุมัติ',
+  'Approve all selected' => '',
   'Are you really sure that you want to disable this user?' => 'คุณแน่ใจหรือว่าต้องการปิดใช้งานผู้ใช้รายนี้จริงๆ',
   'Are you really sure that you want to enable this user?' => 'คุณแน่ใจหรือว่าต้องการเปิดใช้งานผู้ใช้รายนี้จริงๆ',
   'Are you really sure that you want to impersonate this user?' => 'คุณแน่ใจหรือว่าต้องการแอบอ้างเป็นผู้ใช้รายนี้จริงๆ',
+  'Are you really sure? The selected users will be approved and notified by e-mail.' => '',
+  'Are you really sure? The selected users will be deleted and notified by e-mail.' => '',
   'Are you really sure? Users who are not assigned to another group are automatically assigned to the default group.' => 'คุณแน่ใจจริงๆเหรอ? ผู้ใช้ที่ไม่ได้กำหนดให้กับกลุ่มอื่นจะถูกกำหนดให้กับกลุ่มเริ่มต้นโดยอัตโนมัติ',
   'Are you sure that you want to delete following user?' => 'คุณแน่ใจหรือไม่ว่าต้องการลบผู้ใช้ที่ติดตาม',
   'Cancel' => 'ยกเลิก',
@@ -38,13 +44,15 @@ return array (
   'Create new profile field' => 'สร้างช่องโปรไฟล์ใหม่',
   'Deactivate' => 'ปิดการใช้งาน',
   'Deactivate individual profile permissions?' => 'ปิดใช้งานการอนุญาตโปรไฟล์ส่วนบุคคล?',
+  'Decline' => 'ลดลง',
   'Decline & delete user: <strong>{displayName}</strong>' => 'ปฏิเสธและลบผู้ใช้: <strong>{displayName}</strong>',
+  'Decline all selected' => '',
   'Default' => 'ค่าเริ่มต้น',
   'Default Profile Permissions' => 'สิทธิ์โปรไฟล์เริ่มต้น',
   'Default Sorting' => 'การเรียงลำดับเริ่มต้น',
   'Default content of the registration approval email' => 'เนื้อหาเริ่มต้นของอีเมลอนุมัติการลงทะเบียน',
   'Default content of the registration denial email' => 'เนื้อหาเริ่มต้นของอีเมลปฏิเสธการลงทะเบียน',
-  'Default groups can not be deleted!' => 'ไม่สามารถลบกลุ่มเริ่มต้นได้!',
+  'Default group can not be deleted!' => '',
   'Default user idle timeout, auto-logout (in seconds, optional)' => 'ค่าเริ่มต้นการหมดเวลาไม่ได้ใช้งานของผู้ใช้ ออกจากระบบอัตโนมัติ (เป็นวินาที ไม่จำเป็น)',
   'Default user profile visibility' => 'การเปิดเผยโปรไฟล์ผู้ใช้เริ่มต้น',
   'Delete' => 'ลบ',
@@ -59,6 +67,7 @@ return array (
   'Disabled' => 'พิการ',
   'Disabled users' => 'ผู้ใช้ที่พิการ',
   'Do not change placeholders like {displayName} if you want them to be automatically filled by the system. To reset the email content fields with the system default, leave them empty.' => 'อย่าเปลี่ยนตัวยึดตำแหน่งเช่น {displayName} หากคุณต้องการให้ระบบเติมโดยอัตโนมัติ หากต้องการรีเซ็ตฟิลด์เนื้อหาอีเมลด้วยค่าเริ่มต้นของระบบ ให้เว้นว่างไว้',
+  'Edit' => 'แก้ไข',
   'Edit category' => 'แก้ไขหมวดหมู่',
   'Edit profile category' => 'แก้ไขหมวดหมู่โปรไฟล์',
   'Edit profile field' => 'แก้ไขช่องโปรไฟล์',
@@ -71,18 +80,25 @@ return array (
   'Group not found!' => 'ไม่พบกลุ่ม!',
   'Group user not found!' => 'ไม่พบผู้ใช้กลุ่ม!',
   'Groups' => 'กลุ่ม',
-  'Hello {displayName},<br><br>
-Your account has been activated.<br><br>
-Click here to login:<br>
-{loginLink}<br><br>
+  'Hello {displayName},
 
-Kind Regards<br>
-{AdminName}<br><br>' => 'สวัสดี {displayName}<br><br> บัญชีของคุณเปิดใช้งานแล้ว<br><br> คลิกที่นี่เพื่อเข้าสู่ระบบ:<br> {loginLink}<br><br> ขอแสดงความนับถือ<br> {AdminName}<br><br>',
-  'Hello {displayName},<br><br>
-Your account request has been declined.<br><br>
+Your account has been activated.
 
-Kind Regards<br>
-{AdminName} <br><br> ' => 'สวัสดี {displayName}<br><br> คำขอบัญชีของคุณได้รับการปฏิเสธ<br><br> ขอแสดงความนับถือ<br> {AdminName} <br><br>',
+Click here to login:
+{loginUrl}
+
+Kind Regards
+{AdminName}
+
+' => '',
+  'Hello {displayName},
+
+Your account request has been declined.
+
+Kind Regards
+{AdminName}
+
+' => '',
   'Here you can create or edit profile categories and fields.' => 'ที่นี่คุณสามารถสร้างหรือแก้ไขหมวดหมู่โปรไฟล์และฟิลด์ได้',
   'If individual profile permissions are not allowed, the following settings are unchangeable for all users. If individual profile permissions are allowed, the settings are only set as defaults that users can customise. The following entries are then displayed in the same form in the users profile settings:' => 'หากไม่อนุญาตให้ใช้โปรไฟล์ส่วนบุคคล การตั้งค่าต่อไปนี้จะไม่เปลี่ยนแปลงสำหรับผู้ใช้ทั้งหมด หากอนุญาตการอนุญาตโปรไฟล์ส่วนบุคคล การตั้งค่าจะถูกตั้งค่าเป็นค่าเริ่มต้นที่ผู้ใช้กำหนดเองเท่านั้น รายการต่อไปนี้จะแสดงในรูปแบบเดียวกันในการตั้งค่าโปรไฟล์ผู้ใช้:',
   'If this option is not selected, the ownership of the spaces will be transferred to your account.' => 'หากไม่ได้เลือกตัวเลือกนี้ ความเป็นเจ้าของพื้นที่จะถูกโอนไปยังบัญชีของคุณ',
@@ -107,6 +123,7 @@ Kind Regards<br>
   'New approval requests' => 'คำขออนุมัติใหม่',
   'New users can register' => 'ผู้ใช้ใหม่สามารถลงทะเบียนได้',
   'No' => 'ไม่',
+  'No users were selected.' => '',
   'No value found!' => 'ไม่พบค่า!',
   'None' => 'ไม่มี',
   'Not visible' => 'มองไม่เห็น',
@@ -122,6 +139,8 @@ Kind Regards<br>
   'Prioritised User Group' => 'จัดลำดับความสำคัญกลุ่มผู้ใช้',
   'Profile Permissions' => 'สิทธิ์ของโปรไฟล์',
   'Profiles' => 'โปรไฟล์',
+  'Protected' => 'มีการป้องกัน',
+  'Protected group can not be deleted!' => '',
   'Remove from group' => 'นำออกจากกลุ่ม',
   'Require group admin approval after registration' => 'ต้องได้รับการอนุมัติจากผู้ดูแลกลุ่มหลังจากลงทะเบียน',
   'Resend invitation email' => 'ส่งอีเมลคำเชิญอีกครั้ง',
@@ -129,7 +148,9 @@ Kind Regards<br>
   'Search by name, email or id.' => 'ค้นหาตามชื่อ อีเมล หรือ ID',
   'Select Groups' => 'เลือกกลุ่ม',
   'Select a prioritised group whose members are displayed before all others when the sorting option \'Default\' is selected. The users within the group and the users outside the group are additionally sorted by their last login.' => 'เลือกกลุ่มที่มีลำดับความสำคัญซึ่งมีสมาชิกปรากฏก่อนคนอื่นๆ ทั้งหมดเมื่อเลือกตัวเลือกการเรียงลำดับ \'ค่าเริ่มต้น\' ผู้ใช้ภายในกลุ่มและผู้ใช้ภายนอกกลุ่มจะถูกจัดเรียงเพิ่มเติมตามการเข้าสู่ระบบครั้งล่าสุด',
+  'Select the profile fields you want to add as columns' => '',
   'Select which user information should be displayed in the \'People\' overview. You can select any profile fields, even those you have created individually. ' => 'เลือกข้อมูลผู้ใช้ที่ควรแสดงในภาพรวม "บุคคล" คุณสามารถเลือกฟิลด์โปรไฟล์ใดก็ได้ แม้แต่ฟิลด์ที่คุณสร้างขึ้นเอง',
+  'Send & decline' => 'ส่ง &amp; ปฏิเสธ',
   'Send & save' => 'ส่งและบันทึก',
   'Send invitation email' => 'ส่งอีเมลคำเชิญ',
   'Send invitation email again?' => 'ส่งอีเมลคำเชิญอีกครั้งหรือไม่',
@@ -141,6 +162,10 @@ Kind Regards<br>
   'The Space memberships of all group members will be updated. This may take up to several minutes.' => 'สมาชิก Space ของสมาชิกในกลุ่มทั้งหมดจะได้รับการอัปเดต อาจใช้เวลาหลายนาที',
   'The following list contains all pending sign-ups and invites.' => 'รายการต่อไปนี้ประกอบด้วยการสมัครและคำเชิญที่รอดำเนินการทั้งหมด',
   'The following list contains all registered users awaiting an approval.' => 'รายการต่อไปนี้ประกอบด้วยผู้ใช้ที่ลงทะเบียนทั้งหมดรอการอนุมัติ',
+  'The registration was approved and the user was notified by email.' => '',
+  'The registration was declined and the user was notified by email.' => '',
+  'The registrations were approved and the users were notified by email.' => '',
+  'The registrations were declined and the users were notified by email.' => '',
   'The selected invitations have been successfully deleted!' => 'ลบคำเชิญที่เลือกเรียบร้อยแล้ว!',
   'The user is the owner of these spaces:' => 'ผู้ใช้เป็นเจ้าของช่องว่างเหล่านี้:',
   'This option allows you to determine whether users may set individual permissions for their own profiles.' => 'ตัวเลือกนี้ช่วยให้คุณกำหนดได้ว่าผู้ใช้สามารถตั้งค่าการอนุญาตส่วนบุคคลสำหรับโปรไฟล์ของตนเองได้หรือไม่',

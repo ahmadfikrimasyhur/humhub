@@ -33,7 +33,7 @@ class PeopleFilters extends DirectoryFilters
         $this->addFilter('keyword', [
             'title' => Yii::t('UserModule.base', 'Find people by their profile data or user tags'),
             'placeholder' => Yii::t('UserModule.base', 'Search...'),
-            'type' => 'input',
+            'type' => 'text',
             'wrapperClass' => 'col-md-6 form-search-filter-keyword',
             'afterInput' => Html::submitButton('<span class="fa fa-search"></span>', ['class' => 'form-button-search']),
             'sortOrder' => 100,
@@ -86,7 +86,7 @@ class PeopleFilters extends DirectoryFilters
         $profileFieldSortOrder = 1000;
         foreach ($profileFields as $profileField) {
             $this->initProfileFieldFilter($profileField, $profileFieldSortOrder);
-            $profileFieldSortOrder += 100;
+            $profileFieldSortOrder += 10;
         }
     }
 
@@ -102,13 +102,18 @@ class PeopleFilters extends DirectoryFilters
         $fieldType = isset($definition[$profileField->internal_name]['type']) ? $definition[$profileField->internal_name]['type'] : null;
 
         $filterData = [
-            'title' => Yii::t($profileField->getTranslationCategory(), $profileField->title),
+            'title' => Html::encode(Yii::t($profileField->getTranslationCategory(), $profileField->title)),
             'type' => $fieldType,
             'sortOrder' => $sortOrder,
         ];
 
         switch ($fieldType) {
             case 'text':
+                $filterData['type'] = 'widget';
+                $filterData['widget'] = PeopleFilterPicker::class;
+                $filterData['widgetOptions'] = [
+                    'itemKey' => $profileField->internal_name
+                ];
                 break;
 
             case 'dropdownlist':
